@@ -3,7 +3,7 @@ var uid = "undefined";
 var accessToken = "undefined";
 
 // GPS successfully occured function
-var onSuccess = function(position) {
+var onSuccess = function(location) {
   var jsonUrl = "http://judas.herokuapp.com/pestspotted";
   var position = { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, "accuracy" : location.coords.accuracy, "timestamp" : location.coords.timestamp };
   var auth = { "uid" : uid , "accessToken" : accessToken };
