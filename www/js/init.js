@@ -13,8 +13,8 @@ var onSuccess = function(location) {
   $.mobile.loading("hide");
   $('#popupDialog').popup('close');
 
-  $.post(jsonUrl, packet, function(data) {
-    alert("post success");
+  $.post(jsonUrl, packet, function(data, status) {
+    alert("post status: " + status + "\ndata : " + data);
   }, 'json');
 
 };
