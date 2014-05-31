@@ -4,10 +4,6 @@
 var onSuccess = function(location) {
   
   var jsonUrl = "http://judas.herokuapp.com/pestspotted";
-  var position = { latitude : location.coords.latitude, longitude : location.coords.longitude, 
-                  accuracy : location.coords.accuracy, timestamp : location.coords.timestamp };
-  var authen = { uid : window.sessionStorage.userID , accessToken : window.sessionStorage.accessToken };
-  var packet = { position: position, auth: authen, pest : window.sessionStorage.currentPest};
 
   // Post packet to sever
   $.ajax({
