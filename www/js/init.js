@@ -4,19 +4,33 @@
 var onSuccess = function(location) {
   
   var jsonUrl = "http://judas.herokuapp.com/pestspotted";
-  var position = { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, 
-                  "accuracy" : location.coords.accuracy, "timestamp" : location.coords.timestamp };
-  var auth = { "uid" : window.sessionStorage.userID , "accessToken" : window.sessionStorage.accessToken };
-  var packet = { "position": position, "auth": auth, "pest" : window.sessionStorage.currentPest };
-  
-  // MOVE THIS WHEN SERVER IS RETURNING RESPONSE
-  $.mobile.loading("hide");
-  $('#popupDialog').popup('close');
+  var position = { latitude : location.coords.latitude, longitude : location.coords.longitude, 
+                  accuracy : location.coords.accuracy, timestamp : location.coords.timestamp };
+  var authen = { uid : window.sessionStorage.userID , accessToken : window.sessionStorage.accessToken };
+  var packet = { position: position, auth: authen, pest : window.sessionStorage.currentPest};
 
-  $.post(jsonUrl, packet, function(data, status) {
-    alert("post status: " + status + "\ndata : " + data);
-  }, 'json');
-
+  // Post packet to sever
+  $.ajax({
+    type: "POST",
+    url: jsonUrl,
+    data: { "position" : { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, 
+                  "accuracy" : location.coords.accuracy, "timestamp" : location.coords.timestamp },
+            "auth": {"uid" : window.sessionStorage.userID , "accessToken" : window.sessionStorage.accessToken},
+            "pest": window.sessionStorage.currentPest},
+    dataType: "json",
+    success: function(data, textStatus, jqHXR){
+      $.mobile.loading("hide");
+      alert("status: " + textStatus);
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      $.mobile.loading("hide");
+      alert(JSON.stringify(jqXHR) + "error: " + errorThrown + "status: "+ textStatus);
+    }
+  });
+/*
+  $.get(jsonUrl, function(data, status) {
+    alert("Status:"+ status);
+  }, 'json');*/
 };
 
 // onError Callback receives a PositionError object
@@ -69,9 +83,9 @@ function bindreportpage(){
 };
 
 function bindswipe(){
-  /*
+  
   // Swipe function for report page
-  $( document ).on( "swipeleft swiperight", "#mainpage", function( e ) {
+  $( document ).on( "swipeleft swiperight", ".main-swipe-wrapper", function( e ) {
         if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
           if ( e.type === "swiperight"  ) {
               $( "#report-panel" ).panel( "open" );
@@ -81,7 +95,7 @@ function bindswipe(){
               $( "#report-panel" ).panel( "close" );
           }
         }
-    });*/
+    });
 
   // Swipe function for login page
   $( document ).on( "swipeleft swiperight", "#login", function( e ) {
@@ -92,6 +106,19 @@ function bindswipe(){
         } else {
           if ( e.type === "swipeleft"  ) {
               $( "#login-panel" ).panel( "close" );
+          }
+        }
+    });
+
+  // Swipe function for pest page
+  $( document ).on( "swipeleft swiperight", "#pestpage", function( e ) {
+        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+          if ( e.type === "swiperight"  ) {
+              $( "#pest-panel" ).panel( "open" );
+          }
+        } else {
+          if ( e.type === "swipeleft"  ) {
+              $( "#pest-panel" ).panel( "close" );
           }
         }
     });
@@ -147,6 +174,7 @@ function bindsendreport(){
           }
       });
     }
+    $('#popupDialog').popup('close');
   });
 };
 
