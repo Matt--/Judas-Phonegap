@@ -9,10 +9,14 @@ var onSuccess = function(location) {
   $.ajax({
     type: "POST",
     url: jsonUrl,
-    data: { "position" : { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, 
-                  "accuracy" : location.coords.accuracy, "timestamp" : location.coords.timestamp },
-            "auth": {"uid" : window.sessionStorage.userID , "accessToken" : window.sessionStorage.accessToken},
-            "pest": window.sessionStorage.currentPest},
+    data: 
+				'{"packet": {"position": {"longitude": "22", "latitude": "44", "accuracy": "0.5", "timestamp": "15 May"}, "auth": {"uid": "Matt", "accessToken": "possum"}}}'
+
+
+//{ "position" : { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, 
+//                  "accuracy" : location.coords.accuracy, "timestamp" : location.coords.timestamp },
+//            "auth": {"uid" : window.sessionStorage.userID , "accessToken" : window.sessionStorage.accessToken},
+//            "pest": window.sessionStorage.currentPest},
     dataType: "json",
     success: function(data, textStatus, jqHXR){
       $.mobile.loading("hide");
