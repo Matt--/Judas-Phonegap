@@ -8,11 +8,14 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" /> 
 <script src="js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="css/judas.min.css" />
+<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
 <script src="js/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 <script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" src="js/facebook-js-sdk.js"></script>
 <script type="text/javascript" src="js/cdv-plugin-fb-connect.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
+
 
 </head>
 <body>
@@ -21,18 +24,19 @@
     <div data-role="page" id="login">
 
         <!-- Slider panel -->
-        <div data-role="panel" id="menu-panel" animate="true" display="reveal">
+        <div data-role="panel" id="login-panel" animate="true" display="reveal">
             <ul data-role="listview">
                 <li data-role="list-divider">Selector Menu</li>
                 <li class="FB-loginmenu">Login with Facebook</li>
                 <li class="report-button">Report pest</li>
+                <li class="menu-pest-button">Pest Information</li>
                 <li class="FB-logout">Logout</li>
             </ul>
         </div>
 
         <!-- Universal header -->
         <div data-role="header" data-position="fixed">
-                <a href="#menu-panel" data-icon="bars">Menu</a>
+                <a href="#login-panel" data-icon="bars">Menu</a>
                 <h1>The Judas Project</h1>
         </div>
 
@@ -40,14 +44,24 @@
         <div role="main" class="ui-content" data-role="content">
 
             <div id="center-button" style="text-align: center;">
+
                 <button class="FB-login" id="login-with-facebook" data-inline="true">Login with Facebook</button>
 
-                 <a href="#mainpage" data-role="button" data-mini="true" data-inline="true">Shortcut to mainpage (dev)</a>
+                <a href="#popupFacebook" data-rel="popup" class="ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all ui-btn-inline" data-transition="pop" data-position-to="window">Basic Popup</a>
+                <div data-role="popup" id="popupFacebook" class="ui-content">
+                    <h4>Why Facebook?</h4>
+                    <p>The Judas Project requires that you are logged into Facebook before you can report any pests that you spot.<br>
+                        This is only so that we can isolate users that appear to be dishonest with their submissions.<br>
+                        Your Facebook ID is obscured so that we can never identify you personally.</p>
+                </div>  
+
+                <!-- remove before production -->
+                 <a href="#mainpage" data-role="button" data-mini="true" data-inline="true" data-corners="false">Shortcut to mainpage (dev)</a>
+                 <a href="#pestpage" data-role="button" data-mini="true" data-inline="true">Shortcut to pestpage (dev)</a>
+                 <!-- REMOVE before production -->
             </div>
 
         </div><!-- content-->
-
-        
 
     </div>
 
@@ -56,18 +70,19 @@
 
 
         <!-- Slider panel -->
-        <div data-role="panel" id="main-menu-panel" animate="true" display="reveal">
+        <div data-role="panel" id="report-panel" animate="true" display="reveal">
             <ul data-role="listview">
                 <li data-role="list-divider">Selector Menu</li>
                 <li class="FB-loginmenu">Login with Facebook</li>
                 <li class="report-button">Report pest</li>
+                <li class="menu-pest-button">Pest Information</li>
                 <li class="FB-logout">Logout</li>
             </ul>
         </div>
 
         <!-- Universal header -->
         <div data-role="header" data-position="fixed">
-                <a href="#main-menu-panel" data-icon="bars">Menu</a>
+                <a href="#report-panel" data-icon="bars">Menu</a>
                 <h1>The Judas Project</h1>
         </div>
 
@@ -77,26 +92,103 @@
             <!--Center button wrapper -->
             <div id="center-report" style="text-align: center;">
 
-                <!-- REPORT BUTTON -->
-                <a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="check" data-theme="a">Report Pest</a>
-                <div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
-                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                    <div data-role="header" data-theme="a" class="ui-corner-top">
-                        <h1>Send report?</h1>
+                <!-- Image Carousel -->
+                <div class="carousel-pest">
+                  <div><a href="#" id="btn-collapse-possum"><img class="img-carousel" src="img/lazyfonz1.png"/></a></div>
+                  <div><a href="#" id="btn-collapse-other1"><img class="img-carousel" src="img/lazyfonz2.png"/></a></div>
+                  <div><a href="#" id="btn-collapse-other2"><img class="img-carousel" src="img/lazyfonz3.png"/></a></div>
+                  <div><a href="#" id="btn-collapse-other3"><img class="img-carousel" src="img/lazyfonz4.png"/></a></div>
+                  <div><a href="#" id="btn-collapse-other4"><img class="img-carousel" src="img/lazyfonz5.png"/></a></div>
+                  <div><a href="#" id="btn-collapse-other5"><img class="img-carousel" src="img/lazyfonz6.png"/></a></div>
+                </div>
+
+                <div class="main-swipe-wrapper">
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-possum">
+                      <h3>Possum</h3>
+                      <p>Possums are shit</p>
                     </div>
-                    <div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
-                        <h3 class="ui-title">Are you sure you want to report a pest?</h3>
-                        <p>This action cannot be undone.</p>
-                        <a href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-                        <button data-inline="true" data-rel="back" id="send-report">Report pest</button>
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-other1">
+                      <h3>Other1</h3>
+                      <p>Inset other1 details here</p>
                     </div>
-                </div><!--report button-->
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-other2">
+                      <h3>Other2</h3>
+                      <p>Inset other2 details here</p>
+                    </div>
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-other3">
+                      <h3>Other3</h3>
+                      <p>Inset other3 details here</p>
+                    </div>
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-other4">
+                      <h3>Other4</h3>
+                      <p>Inset other4 details here</p>
+                    </div>
+
+                    <div class="ui-body ui-body-b ui-corner-all collapse-pest-div" id="div-collapse-other5">
+                      <h3>Other5</h3>
+                      <p>Inset other5 details here</p>
+                    </div>
+
+
+                    <!-- REPORT BUTTON -->
+                    <a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="check" data-theme="a">Report Pest</a>
+                    <div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <div data-role="header" data-theme="a" class="ui-corner-top">
+                            <h1>Send report?</h1>
+                        </div>
+                        <div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
+                            <h3 class="ui-title">Are you sure you want to report a pest?</h3>
+                            <p>This action cannot be undone.</p>
+                            <a href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
+                            <button data-inline="true" data-rel="back" id="send-report">Report pest</button>
+                        </div>
+                    </div><!--report button-->
+
+                </div><!--swipe wrapper-->
 
             </div><!--center wrapper-->
 
         </div><!-- /content -->
 
     </div><!-- /page -->
+
+    <!-- Start of pest info page -->
+    <div data-role="page" id="pestpage">
+
+        <!-- Slider panel -->
+        <div data-role="panel" id="pest-panel" animate="true" display="reveal">
+            <ul data-role="listview">
+                <li data-role="list-divider">Selector Menu</li>
+                <li class="FB-loginmenu">Login with Facebook</li>
+                <li class="report-button">Report pest</li>
+                <li class="menu-pest-button">Pest Information</li>
+                <li class="FB-logout">Logout</li>
+            </ul>
+        </div>
+
+        <!-- Universal header -->
+        <div data-role="header" data-position="fixed">
+                <a href="#pest-panel" data-icon="bars">Menu</a>
+                <h1>The Judas Project</h1>
+        </div>
+
+        <!-- Page content -->
+        <div role="main" class="ui-content" data-role="content">
+
+            <h1>Pests</h1>
+
+        </div><!-- content-->
+
+    </div>
+
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
 
 </body>
 
