@@ -10,7 +10,7 @@ var onSuccess = function(location) {
     type: "POST",
     url: jsonUrl,
     data: 
-				'{"packet": {"position": {"longitude": "22", "latitude": "44", "accuracy": "0.5", "timestamp": "15 May"}, "auth": {"uid": "Matt", "accessToken": "possum"}}}'
+				{"packet": {"position": {"longitude": "22", "latitude": "44", "accuracy": "0.5", "timestamp": "15 May"}, "auth": {"uid": "Matt", "accessToken": "possum"}}}
 
 
 //{ "position" : { "latitude" : location.coords.latitude, "longitude" : location.coords.longitude, 
